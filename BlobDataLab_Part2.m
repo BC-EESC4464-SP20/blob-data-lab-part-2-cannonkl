@@ -58,20 +58,22 @@ woa_papa_rep = [repmat(woa_papa,7,1); woa_papa(1:3)];
 
 %% 2b. Plot the WOA temperature time series along with the OOI temperature time series from Part 1
 
-for i=[1 3 4 5 6]
+figure (1)
+ subplot(2,1,1);
+ title ('OOI Ocean Station Papa Oceana Temperature (30m)')
+plot(timec_five,swtemp_five,'k.')
+datetick('x','dd-mmm-yyyy')
+ylabel('Seawater Temperature C^o')
+hold on 
 
-     
-filename = ['deployment000' num2str(i) '_GP03FLMB.nc'];
+% plot(timec_new_five,swtemp_new_five,'b.')
 
-[timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std]= BlobDataLab(filename);
+plot(timec_five,temp_smooth_five,'r.')
 
-hold on
-
-end 
- 
-figure(1) 
+legend('Raw Data','Moving Mean','Location','best', 'FontSize',14);
+  
 subplot(2,1,2);
-plot(woa_time,woa_papa_rep,'b','LineWidth',5)
+plot(woa_time,woa_papa_rep,'b','LineWidth',1)
 datetick('x','dd-mmm-yyyy')
 xlim('auto')
 legend('WOA climatology','Location','best');
@@ -82,7 +84,8 @@ legend('WOA climatology','Location','best');
 % temperature data over the extended timeline (woa_papa_rep) from the
 % original extended monthly data (woa_time) onto the times when the OOI
 % data were collected (from your Part 1 analysis)
-% -->
+
+
 
 %% 3b. Calculate the temperature anomaly as the difference between the OOI mooring
 % observations (using the smoothed data during good intervals) and the
