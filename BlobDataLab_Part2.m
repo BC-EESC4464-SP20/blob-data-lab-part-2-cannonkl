@@ -67,7 +67,7 @@ hold on
 
 % plot(timec_new_five,swtemp_new_five,'b.')
 
-plot(timec_five,temp_smooth_five,'r.')
+plot(timec_new_five,temp_smooth_new_five,'r.')
 plot(woa_time,woa_papa_rep,'b','LineWidth',2)
 datetick('x','dd-mmm-yyyy')
 xlim('auto')
@@ -82,21 +82,22 @@ legend('Raw Data','Moving Mean','WOA climatology','Location','best', 'FontSize',
 % temperature data over the extended timeline (woa_papa_rep) from the
 % original extended monthly data (woa_time) onto the times when the OOI
 % data were collected (from your Part 1 analysis)
-woa_papa_interp = interp1(woa_time,woa_papa_rep,timec_five);
+
+woa_papa_interp = interp1(woa_time,woa_papa_rep,timec_new_five);
 
 
 %% 3b. Calculate the temperature anomaly as the difference between the OOI mooring
 % observations (using the smoothed data during good intervals) and the
 % climatological data from the World Ocean Atlas interpolated onto those
 % same timepoints
-temp_anom = (temp_smooth_five-woa_papa_interp);
+temp_anom = (temp_smooth_new_five-woa_papa_interp);
 
 %% 4. Plot the time series of the T anomaly you have now calculated by combining the WOA and OOI data
 figure(2)
 
-plot(timec_five, temp_anom, '.')
+plot(timec_new_five, temp_anom, '.')
 datetick('x','dd-mmm-yyyy')
-brought down for more plotting 
+%brought down for more plotting 
 %% 5. Now bring in the satellite data observed at Ocean Station Papa
 
 %5a. Convert satellite time to MATLAB timestamp (following the same approach
@@ -125,11 +126,11 @@ sstanomOSP(:,1) = sstAnom(139,123,:);
 
 figure(2)
 
-plot(timec_five, temp_anom, 'b.')
+plot(timec_new_five, temp_anom, 'b.')
 datetick('x','dd-mmm-yyyy')
 hold on 
 plot(timejpl, sstanomOSP,'c','LineWidth',1)
 p1=[sstanomOSP(79,1),sstanomOSP(62,1), sstanomOSP(55,1), sstanomOSP(38,1), sstanomOSP(31,1), sstanomOSP(14,1)];
-time1=[time(79,1),timejpl(62,1), timejpl(55,1), timejpl(38,1), timejpl(31,1), timejpl(14,1)];
-plot(time1,p1,'m.','MarkerSize',12)
+time1=[timejpl(79,1),timejpl(62,1), timejpl(55,1), timejpl(38,1), timejpl(31,1), timejpl(14,1)];
+plot(time1,p1,'m.','MarkerSize',18)
 legend('Mooring-based Temperature Anomaly','Satillite Sea Surface Temperature Anomaly','Anomaly Times Shown in Regional Mapping','Location','best', 'FontSize',12);
